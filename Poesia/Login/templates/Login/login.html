@@ -1,0 +1,32 @@
+{% extends 'Login/layaout.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+{% block CustomCSS %}
+    <link rel="stylesheet" href="{% static 'Login/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <main class="form-signin w-100 m-auto">
+            <!-- Formulario para iniciar sesion -->
+            <form action="/login/" method="POST">
+                <img class="mb-4" src="{% static 'Login/img/Logo.PNG' %}" alt="" width="100" height="100">
+                <h1 class="h3 mb-3 fw-normal">Inicio de sesion</h1>
+        
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username" required>
+                    <label for="floatingInput">Usuario o Correo</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña" name="password" required>
+                    <label for="floatingPassword">Contraseña</label>
+                </div>
+                {% csrf_token %}
+                <button class="w-100 btn btn-lg btn-success" type="submit">Iniciar Sesion</button><br><br>
+                <!-- Button trigger modal -->
+                <p class="mt-5 mb-3 text-muted">&copy;2022</p>
+            </form>
+        </main> 
+    </div>
+{% endblock %}
