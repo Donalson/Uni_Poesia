@@ -7,16 +7,16 @@
 {% endblock %}
 
 {% block content %}
-<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-    <strong>Sesion Cerrada</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+        <strong>Sesion Cerrada</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="text-center">
         <main class="form-signin w-100 m-auto">
             <!-- Formulario para iniciar sesion -->
             <form action="/login/" method="POST">
-                <img class="mb-4" src="{% static 'Login/img/Logo.PNG' %}" alt="" width="100" height="100">
-                <h1 class="h3 mb-3 fw-normal">Inicio de sesion</h1>
+                <img class="mb-4" src="https://www.usac.edu.gt/img/logo_usac2018.svg" alt="" width="200" height="86">
+                <h1 class="h3 mb-3 fw-normal text-white">Inicio de sesion</h1>
         
                 <div class="form-floating">
                     <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username" required>
@@ -29,7 +29,7 @@
                 {% csrf_token %}
                 <button class="w-100 btn btn-lg btn-success" type="submit">Iniciar Sesion</button><br><br>
                 <!-- Button trigger modal -->
-                <p class="mt-5 mb-3 text-muted">&copy;2022</p>
+                <p class="mt-5 mb-3 text-muted">&copy; USAC 2022</p>
             </form>
         </main> 
     </div>

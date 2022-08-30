@@ -12,12 +12,23 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     {% load static %}
+    <style>
+      body{
+          background: #bdc3c7;  /* fallback for old browsers */
+          background: -webkit-linear-gradient(to top, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
+          background: linear-gradient(to top, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+      }
+  </style>
 </head>
 <body>
     {# Navbar de la pagina #}
-    <nav class="navbar navbar-expand-md bg-light">
+    <nav class="navbar navbar-expand-md" style="background-color: #bdc3c7">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{% url 'Index' %}">
+          <a class="navbar-brand" href="{% url 'Formulario_Registro' %}">
             <img src="https://www.usac.edu.gt/img/logo_usac2018.svg" alt="" width="200" height="86">
             Universidad USAC</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
