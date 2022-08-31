@@ -6,7 +6,111 @@
 {% endblock %}
 
 {% block content %}
+<div id="Alertas"></div>
 
-  <h1>Texto de prueba index</h1>
+  <h1>Formulario de Registro | Evento de Poesia</h1>
+
+  <form class="form-control" action="{% url 'Formulario_Registro' %}" method="POST" id="Formulario">
+    <div class="mb-3">
+      <label class="form-label">Carnet</label>
+      <input type="text" class="form-control" name="Carnet" id="Carnet" placeholder="Ax5xx3" maxlength="6" minlength="6" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nombre Completo</label>
+      <input type="text" class="form-control" name="NombreCompleto" placeholder="Donalson Avel Javier Landaverry" maxlength="50" minlength="3" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Direccion</label>
+      <input type="text" class="form-control" name="Direccion" placeholder="San Mateo II" minlength="3" maxlength="30" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Genero</label>
+      <select class="form-select" name="Genero" aria-label="Default select example" required>
+        <option selected value="">Seleciones un genero</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Telefono</label>
+      <input type="text" class="form-control" name="Telefono" placeholder="1234-1234" maxlength="15" minlength="8" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Fecha de Nacimiento</label>
+      <input type="date" class="form-control" name="FNacimiento" id="FNacimiento" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Carrera del Estudiante</label>
+      <input type="text" class="form-control" name="Carrera" placeholder="Ingenieria en Sistemas" maxlength="30" minlength="3" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Genero de Poesia</label>
+      <select class="form-select" name="GeneroPoesia" aria-label="Default select example" required>
+        <option selected value="">Seleciones un genero de poesia</option>
+        <option value="L">Lírica</option>
+        <option value="E">Épica</option>
+        <option value="D">Dramática</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Fecha de Inscripcion</label>
+      <input type="date" class="form-control" name="FInscripcion" readonly>
+    </div>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Registrar</button>
+  </form>
+
+  <script>
+    var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+    var hoy = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1).slice(0,10)
+    var max = '2004' + hoy.slice(4)
+    window.onload = function(){
+      document.getElementsByName('FInscripcion')[0].value = hoy
+      document.getElementsByName('FNacimiento')[0].setAttribute('max', max)
+    }
+
+    document.getElementById("Carnet").onchange = function() {ValidarCarnet()};
+    document.getElementById("FNacimiento").onchange = function() {Edad()};
+
+    function ValidarCarnet(){
+      var Carnet = document.getElementsByName('Carnet')[0].value
+      if(Carnet.length == 6){
+        var Verificacion = true
+        if(Carnet.charAt(0) != 'A'){
+          Verificacion = false
+        }
+        if(Carnet.charAt(2) != '5'){
+          Verificacion = false
+        }
+        if(Carnet.charAt(5) != '1' & Carnet.charAt(5) != '3' & Carnet.charAt(5) != '9'){
+          Verificacion = false
+        }
+        if(Carnet.includes('0')){
+          Verificacion = false
+        }
+        if(Verificacion == false){
+          alert('El carnet no es valido, el primer caracter debe ser "A", el terrcero "5", el ultimo "1/3/9" y no se permiten "0"')
+          /*
+          var i = document.createElement('div');
+          i.setAttribute("class", "alert alert-warning alert-dismissible fade show text-center");
+          i.setAttribute("role", "alert");
+          i.textContent = 'El carnet no es valido, el primer caracter debe ser "A", el terrcero "5", el ultimo "1/3/9" y no se permiten "0"'
+          var addressContainer = document.getElementById("Alertas");
+          addressContainer.appendChild(i);
+          */
+          document.getElementById('Alertas').innerHTML = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">El carnet no es valido, el primer caracter debe ser "A", el terrcero "5", el ultimo "1/3/9" y no se permiten "0"<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+        }
+      }
+    }
+
+    function Edad(){
+      var FNacimiento = document.getElementsByName('FNacimiento')[0].value
+      var edad = new Date().getFullYear() - new Date(FNacimiento).getFullYear()
+      if (edad<17 | isNaN(edad)){
+        alert('Debe ser mayor de 17 años para participar')
+        document.getElementById('Alertas').innerHTML = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">Debe ser mayor de 17 años para participar<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+      }
+    }
+  </script>
 
 {% endblock %}

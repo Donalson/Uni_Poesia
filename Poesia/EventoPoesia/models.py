@@ -2,9 +2,9 @@ from datetime import datetime
 from django.db import models
 
 # Create your models here.
-
+@classmethod
 def hoy():
-    x = datetime.date.today()
+    x = str(datetime.now())[0:10]
     return x
 
 class Poesia(models.Model):
@@ -17,6 +17,7 @@ class Poesia(models.Model):
         ('E', 'Épica'),
         ('D', 'Dramática')
     )
+
     Carnet = models.CharField(max_length=6)
     Nombre_Completo = models.CharField(max_length=50)
     Direccion = models.CharField(max_length=30)
@@ -25,5 +26,5 @@ class Poesia(models.Model):
     Fecha_Nacimiento = models.DateField()
     Carrera_Estudiante = models.CharField(max_length=50)
     Genero_Poesia = models.CharField(max_length=1, choices=Generos_Poesia)
-    Fecha_Inscripcion = models.DateField(hoy)
+    Fecha_Inscripcion = models.DateField(default=hoy)
     Fecha_Declamacion = models.DateField()
