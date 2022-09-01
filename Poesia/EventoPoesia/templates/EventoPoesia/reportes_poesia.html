@@ -7,6 +7,42 @@
 
 {% block content %}
 
-  <h1>Texto de prueba reportes</h1>
+  <h1>Reporte de inscripcion | Evento Poesia</h1>
+  <div class="table-responsive">
+    <table class="table table-sm table-dark table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Carnet</th>
+          <th>Nombre Completo</th>
+          <th>Direccion</th>
+          <th>Genero</th>
+          <th>Telefono</th>
+          <th>Fecha Nacimiento</th>
+          <th>Carrera del Estudiante</th>
+          <th>Genero de Poesia</th>
+          <th>Fecha Inscripcion</th>
+          <th>Fecha Declamacion</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for element in Registros %}
+          <tr>
+            <th>{{ element.id }}</th>
+            <th>{{ element.Carnet }}</th>
+            <th>{{ element.Nombre_Completo }}</th>
+            <th>{{ element.Direccion }}</th>
+            {% if element.Genero == 'M' %}<th> Masculino</th>{% else %}<th>Femenino</th>{% endif %}
+            <th>{{ element.Telefono }}</th>
+            <th>{{ element.Fecha_Nacimiento }}</th>
+            <th>{{ element.Carrera_Estudiante }}</th>
+            {% if element.Genero_Poesia == 'L' %}<th> Lírica </th>{% elif element.Genero_Poesia == 'E' %}<th>Épica</th>{% else %}<th>Dramática</th>{% endif %}
+            <th>{{ element.Fecha_Inscripcion }}</th>
+            <th>{{ element.Fecha_Declamacion }}</th>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 {% endblock %}

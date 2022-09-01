@@ -25,15 +25,21 @@ def formulario_registro(request):
                 GeneroPoesia = request.POST['GeneroPoesia']
                 FInscripcion = request.POST['FInscripcion']
                 FDeclamacion = FechaDeclamacion(Carnet[5], FInscripcion, GeneroPoesia)
-                #datos =         f'Carnet="{Carnet}", Nombre_Completo="{NombreCompleto}", Direccion="{Direccion}", Genero="{Genero}", Telefono="{Telefono}", Fecha_Nacimiento="{FNacimiento}", Carrera_Estudiante="{Carrera}", Genero_Poesia="{GeneroPoesia}", Fecha_Declamacion="{FDeclamacion}"'
+                #datos = f'Carnet="{Carnet}", Nombre_Completo="{NombreCompleto}", Direccion="{Direccion}", Genero="{Genero}", Telefono="{Telefono}", Fecha_Nacimiento="{FNacimiento}", Carrera_Estudiante="{Carrera}", Genero_Poesia="{GeneroPoesia}", Fecha_Declamacion="{FDeclamacion}"'
                 #print(datos)
-                Registro = Poesia.objects.create(Carnet="{Carnet}", Nombre_Completo="{NombreCompleto}", Direccion="{Direccion}", Genero="{Genero}", Telefono="{Telefono}", Fecha_Nacimiento="{FNacimiento}", Carrera_Estudiante="{Carrera}", Genero_Poesia="{GeneroPoesia}", Fecha_Declamacion="{FDeclamacion}")
+                #Registro = Poesia.objects.create(Carnet=f"{Carnet}", Nombre_Completo=f"{NombreCompleto}", Direccion=f"{Direccion}", Genero=f"{Genero}", Telefono=f"{Telefono}", Fecha_Nacimiento=f"{FNacimiento}", Carrera_Estudiante=f"{Carrera}", Genero_Poesia=f"{GeneroPoesia}", Fecha_Declamacion=f"{FDeclamacion}")
+                #Registro = Poesia(Carnet=str(Carnet), Nombre_Completo=str(NombreCompleto), Direccion=str(Direccion), Genero=str(Genero), Telefono=str(Telefono), Fecha_Nacimiento=FNacimiento, Carrera_Estudiante=str(Carrera), Genero_Poesia=str(GeneroPoesia), Fecha_Declamacion=FDeclamacion)
+                #print(type(FNacimiento))
+                Registro = Poesia(Carnet=f'{Carnet}', Nombre_Completo=f'{NombreCompleto}', Direccion=f'{Direccion}', Genero=f'{Genero}', Telefono=f'{Telefono}', Fecha_Nacimiento='2000-09-26', Carrera_Estudiante=f'{Carrera}', Genero_Poesia=f'{GeneroPoesia}', Fecha_Declamacion='2022-08-31')
+                """
                 if Registro.save():
                     messages.success(request, f'Se registrado exitosamente {NombreCompleto}, su fecha de declamacion es: {FDeclamacion}')
                     return redirect('Formulario_Registro')
                 else: 
                     messages.error(request, 'Parece que algo salio mal')
                     return redirect('Formulario_Registro')
+                """
+                return redirect('Formulario_Registro')
             else:
                 messages.warning(request, 'Debe ser mayor de 17 años para participar')
                 return redirect('Formulario_Registro')
