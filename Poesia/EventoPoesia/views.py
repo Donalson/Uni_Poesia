@@ -46,12 +46,13 @@ def formulario_registro(request):
         else:
             messages.warning(request, 'El carnet no es valido, el primer caracter debe ser "A", el terrcero "5", el ultimo "1/3/9" y no se permiten "0"')
             return redirect('Formulario_Registro')
-    else: 
+    else:
         return render(request, 'EventoPoesia/formulario_registro.html')
 
 @login_required(login_url='Login', redirect_field_name='luego')
 def reportes_poesia(request):
-    datos = Poesia.objects.all()
+    Ordenar = request.GET.get('Ordenar_Por', 'id')
+    datos = Poesia.objects.all().order_by(Ordenar)
     context = {'Registros':datos}
     return render(request, 'EventoPoesia/reportes_poesia.html', context)
 
