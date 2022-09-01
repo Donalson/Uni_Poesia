@@ -7,6 +7,12 @@ def hoy():
     x = str(datetime.now())[0:10]
     return x
 
+class PoesiaManager(models.Manager):
+    def crear_poesia(self, carnet, nombre, direccion, telefono, genero, fnacimiento, carrera, generop, finscripcion, fdeclamacion):
+        print(carnet, nombre, direccion, telefono, genero, fnacimiento, carrera, generop, finscripcion, fdeclamacion)
+        poesia = self.create(Carnet= carnet, Nombre_Completo=nombre, Direccion=direccion, Genero=genero, Telefono=telefono, Fecha_Nacimiento=fnacimiento, Carrera_Estudiante=carrera, Genero_Poesia=generop, Fecha_Inscripcion=finscripcion, Fecha_Declamacion=fdeclamacion)
+        return poesia
+
 class Poesia(models.Model):
     Generos = (
         ('M', 'Masculino'),
@@ -28,3 +34,5 @@ class Poesia(models.Model):
     Genero_Poesia = models.CharField(max_length=1, choices=Generos_Poesia)
     Fecha_Inscripcion = models.DateField(default=hoy)
     Fecha_Declamacion = models.DateField()
+
+    objects = PoesiaManager()

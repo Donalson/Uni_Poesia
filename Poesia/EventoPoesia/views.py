@@ -1,3 +1,4 @@
+from fnmatch import fnmatch
 from business_calendar import Calendar, MO, TU, WE, TH, FR
 from pandas.tseries.offsets import BMonthEnd
 from datetime import datetime
@@ -30,16 +31,15 @@ def formulario_registro(request):
                 #Registro = Poesia.objects.create(Carnet=f"{Carnet}", Nombre_Completo=f"{NombreCompleto}", Direccion=f"{Direccion}", Genero=f"{Genero}", Telefono=f"{Telefono}", Fecha_Nacimiento=f"{FNacimiento}", Carrera_Estudiante=f"{Carrera}", Genero_Poesia=f"{GeneroPoesia}", Fecha_Declamacion=f"{FDeclamacion}")
                 #Registro = Poesia(Carnet=str(Carnet), Nombre_Completo=str(NombreCompleto), Direccion=str(Direccion), Genero=str(Genero), Telefono=str(Telefono), Fecha_Nacimiento=FNacimiento, Carrera_Estudiante=str(Carrera), Genero_Poesia=str(GeneroPoesia), Fecha_Declamacion=FDeclamacion)
                 #print(type(FNacimiento))
-                Registro = Poesia(Carnet=f'{Carnet}', Nombre_Completo=f'{NombreCompleto}', Direccion=f'{Direccion}', Genero=f'{Genero}', Telefono=f'{Telefono}', Fecha_Nacimiento='2000-09-26', Carrera_Estudiante=f'{Carrera}', Genero_Poesia=f'{GeneroPoesia}', Fecha_Declamacion='2022-08-31')
-                """
-                if Registro.save():
-                    messages.success(request, f'Se registrado exitosamente {NombreCompleto}, su fecha de declamacion es: {FDeclamacion}')
-                    return redirect('Formulario_Registro')
-                else: 
+                #Registro = Poesia(Carnet=f'{Carnet}', Nombre_Completo=f'{NombreCompleto}', Direccion=f'{Direccion}', Genero=f'{Genero}', Telefono=f'{Telefono}', Fecha_Nacimiento='2000-09-26', Carrera_Estudiante=f'{Carrera}', Genero_Poesia=f'{GeneroPoesia}', Fecha_Declamacion='2022-08-31')
+                try: 
+                    Registro = Poesia.objects.crear_poesia(Carnet, NombreCompleto, Direccion, Genero, Telefono, FNacimiento, Carrera, GeneroPoesia,FInscripcion, FDeclamacion)
+                except:
                     messages.error(request, 'Parece que algo salio mal')
                     return redirect('Formulario_Registro')
-                """
-                return redirect('Formulario_Registro')
+                finally:
+                    messages.success(request, f'Se registrado exitosamente {NombreCompleto}, su fecha de declamacion es: {FDeclamacion}')
+                    return redirect('Formulario_Registro')
             else:
                 messages.warning(request, 'Debe ser mayor de 17 años para participar')
                 return redirect('Formulario_Registro')
