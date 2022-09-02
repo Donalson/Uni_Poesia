@@ -1,4 +1,3 @@
-from fnmatch import fnmatch
 from business_calendar import Calendar, MO, TU, WE, TH, FR
 from pandas.tseries.offsets import BMonthEnd
 from datetime import datetime
@@ -87,4 +86,6 @@ def FechaDeclamacion(CA, FI, GP):
     else:
         date = datetime.strptime(FI, '%Y-%m-%d').isocalendar()
         friday = datetime.fromisocalendar(date[0], date[1], 5)
+        if (datetime.fromisocalendar(date[0], date[1], date[2])) > friday:
+            friday = datetime.fromisocalendar(date[0], (date[1]+1), 5)
         return str(friday)[0:10]
